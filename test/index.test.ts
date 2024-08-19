@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { streakCounter } from '../src'
 import { formatDate } from '../src/utils'
 
@@ -9,6 +9,10 @@ describe('streakCounter', () => {
   beforeEach(() => {
     const mockJSDOM = new JSDOM('', { url: 'https://localhost' })
     mockLocalStorage = mockJSDOM.window.localStorage
+  })
+
+  afterEach(() => {
+    mockLocalStorage.clear()
   })
 
   it('should return an object with currentCount, startDate and lastLoginDate', () => {
