@@ -136,4 +136,32 @@ describe('streakCounter', () => {
       expect(streak.currentCount).toBe(1)
     })
   })
+
+  describe('with an invalid streak in localStorage', () => {
+    let mockLocalStorage: Storage
+
+    beforeEach(() => {
+      const mockJSDOM = new JSDOM('', { url: 'https://localhost' })
+      mockLocalStorage = mockJSDOM.window.localStorage
+
+      const invalidStreak = {
+        count: '1',
+        date: '12-15-2021',
+        invalid: true,
+      }
+      mockLocalStorage.setItem(STREAK_KEY, JSON.stringify(invalidStreak))
+    })
+
+    afterEach(() => {
+      mockLocalStorage.clear()
+    })
+
+    it('should return a new streak when the one in localStorage is invalid', () => {
+      const date = new Date('12/12/2021')
+      const formattedDate = formatDate(date)
+      const streak = streakCounter(mockLocalStorage, date)
+      expect(streak.startDate).toBe(formattedDate)
+      expect(streak.currentCount).toBe(1)
+    })
+  })
 })

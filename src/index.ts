@@ -1,6 +1,9 @@
-import { shouldIncrementOrResetStreakCount, STREAK_KEY } from './lib'
+import {
+  buildStreak,
+  shouldIncrementOrResetStreakCount,
+  STREAK_KEY,
+} from './lib'
 import type { Streak } from './types'
-import { formatDate } from './utils'
 
 export function streakCounter(localStorage_: Storage, date: Date): Streak {
   const rawStreak = localStorage_.getItem(STREAK_KEY)
@@ -12,45 +15,34 @@ export function streakCounter(localStorage_: Storage, date: Date): Streak {
         new Date(streak.lastLoginDate),
       )
 
-      if (nextAction === 'increment') {
-        const updatedStreak: Streak = {
-          ...streak,
-          currentCount: streak.currentCount + 1,
-          lastLoginDate: formatDate(date),
+      let updatedStreak = <Streak>{}
+
+      switch (nextAction) {
+        case 'increment': {
+          updatedStreak = buildStreak(date, {
+            currentCount: streak.currentCount + 1,
+            startDate: streak.startDate,
+          })
+          break
         }
-
-        localStorage_.setItem(STREAK_KEY, JSON.stringify(updatedStreak))
-
-        return updatedStreak
-      }
-
-      if (nextAction === 'reset') {
-        const updatedStreak: Streak = {
-          currentCount: 1,
-          startDate: formatDate(date),
-          lastLoginDate: formatDate(date),
+        case 'reset': {
+          updatedStreak = buildStreak(date)
+          break
         }
-
-        localStorage_.setItem(STREAK_KEY, JSON.stringify(updatedStreak))
-
-        return updatedStreak
+        case 'none': {
+          updatedStreak = streak
+        }
       }
 
-      if (nextAction === 'none') {
-        return streak
-      }
+      localStorage_.setItem(STREAK_KEY, JSON.stringify(updatedStreak))
 
-      return streak
-    } catch (error) {
+      return updatedStreak
+    } catch {
       console.error('Failed to parse streak from localStorage')
     }
   }
 
-  const streak: Streak = {
-    currentCount: 1,
-    startDate: formatDate(date),
-    lastLoginDate: formatDate(date),
-  }
+  const streak: Streak = buildStreak(date)
 
   localStorage_.setItem(STREAK_KEY, JSON.stringify(streak))
 

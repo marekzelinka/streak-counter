@@ -1,4 +1,5 @@
-import { differenceInDays } from './utils'
+import type { Streak } from './types'
+import { differenceInDays, formatDate } from './utils'
 
 export const STREAK_KEY = 'streak'
 
@@ -20,4 +21,20 @@ export function shouldIncrementOrResetStreakCount(
 
   // Otherwise they logged in after a day, which breaks the streak
   return 'reset'
+}
+
+export function buildStreak(
+  date: Date,
+  overrideDefaults?: Partial<Streak>,
+): Streak {
+  const defaultStreak: Streak = {
+    currentCount: 1,
+    startDate: formatDate(date),
+    lastLoginDate: formatDate(date),
+  }
+
+  return {
+    ...defaultStreak,
+    ...overrideDefaults,
+  }
 }
