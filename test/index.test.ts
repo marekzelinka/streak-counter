@@ -63,7 +63,7 @@ describe('streakCounter', () => {
     })
 
     it('should return the streak from localStorage', () => {
-      const date = new Date()
+      const date = new Date('12/12/2021')
       const streak = streakCounter(mockLocalStorage, date)
       // Should match the dates used to set up the test
       expect(streak.startDate).toBe('12/12/2021')
@@ -95,6 +95,45 @@ describe('streakCounter', () => {
       // but since we authored it, we can skip this step here
       const streak = JSON.parse(rawStreak!) as Streak
       expect(streak.currentCount).toBe(2)
+    })
+
+    it('should reset when login days are not consecutive', () => {
+      const date = new Date('12/13/2021')
+      const streak = streakCounter(mockLocalStorage, date)
+      expect(streak.currentCount).toBe(2)
+
+      // Skip a day and break the streak
+      const updatedDate = new Date('12/15/2021')
+      const updatedStreak = streakCounter(mockLocalStorage, updatedDate)
+      expect(updatedStreak.currentCount).toBe(1)
+    })
+
+    it('should not reset the streak for same-day login', () => {
+      const date = new Date('12/13/2021')
+      // Call it once, so it updates the streak
+      streakCounter(mockLocalStorage, date)
+
+      // Simulate same-day login
+      const updatedDate = new Date('12/13/2021')
+      const updatedStreak = streakCounter(mockLocalStorage, updatedDate)
+      expect(updatedStreak.currentCount).toBe(2)
+    })
+
+    it('should save the reset streak to localStorage', () => {
+      const date = new Date('12/13/2021')
+      // Call it once, so it updates the streak
+      streakCounter(mockLocalStorage, date)
+
+      // Skip a day and break the streak
+      const updatedDate = new Date('12/15/2021')
+      // Call it once, so it updates the streak
+      streakCounter(mockLocalStorage, updatedDate)
+
+      const rawStreak = mockLocalStorage.getItem(STREAK_KEY)
+      // Normally you should wrap in try/catch in case the JSON is invalid,
+      // but since we authored it, we can skip this step here
+      const streak = JSON.parse(rawStreak!) as Streak
+      expect(streak.currentCount).toBe(1)
     })
   })
 })

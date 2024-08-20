@@ -24,6 +24,22 @@ export function streakCounter(localStorage_: Storage, date: Date): Streak {
         return updatedStreak
       }
 
+      if (nextAction === 'reset') {
+        const updatedStreak: Streak = {
+          currentCount: 1,
+          startDate: formatDate(date),
+          lastLoginDate: formatDate(date),
+        }
+
+        localStorage_.setItem(STREAK_KEY, JSON.stringify(updatedStreak))
+
+        return updatedStreak
+      }
+
+      if (nextAction === 'none') {
+        return streak
+      }
+
       return streak
     } catch (error) {
       console.error('Failed to parse streak from localStorage')
