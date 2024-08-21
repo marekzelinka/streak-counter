@@ -23,4 +23,4 @@ const streak = streakCounter(localStorage, today)
 // }
 ```
 
-[![View demo on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/typescript-from-scratch-tutorial-template-forked-d3fg5l)
+[![Edit streak-counter-demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/streak-counter-demo-d3fg5l)
