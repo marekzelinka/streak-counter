@@ -1,6 +1,6 @@
 {
   "name": "@marekzelinka/streak-counter",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "a streak counter inspired by Duolingo",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -29,7 +29,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.4.1",
     "@vitest/coverage-v8": "^2.0.5",
     "jsdom": "^24.1.1",
     "microbundle": "^0.15.1",
