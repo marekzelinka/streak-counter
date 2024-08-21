@@ -24,7 +24,7 @@
   "author": "Joe Previte <jjprevite@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/marekzelinka/streak-counter"
+    "url": "git+https://github.com/marekzelinka/streak-counter.git"
   },
   "license": "MIT",
   "devDependencies": {
