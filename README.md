@@ -22,3 +22,5 @@ const streak = streakCounter(localStorage, today)
 //    startDate: "11/11/2021",
 // }
 ```
+
+[![View demo on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/typescript-from-scratch-tutorial-template-forked-d3fg5l)
