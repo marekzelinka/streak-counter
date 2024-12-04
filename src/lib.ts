@@ -1,5 +1,5 @@
-import type { Streak } from "./types";
-import { differenceInDays, formatDate } from "./utils";
+import type { Streak } from "./types.js";
+import { differenceInDays, formatDate } from "./utils.js";
 
 export const STREAK_KEY = "streak";
 

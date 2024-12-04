@@ -2,8 +2,8 @@ import {
   buildStreak,
   shouldIncrementOrResetStreakCount,
   STREAK_KEY,
-} from "./lib";
-import type { Streak } from "./types";
+} from "./lib.js";
+import type { Streak } from "./types.js";
 
 export function streakCounter(localStorage_: Storage, date: Date): Streak {
   const rawStreak = localStorage_.getItem(STREAK_KEY);
