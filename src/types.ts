@@ -1,5 +1,5 @@
 export interface Streak {
-  currentCount: number
-  startDate: string
-  lastLoginDate: string
+  currentCount: number;
+  startDate: string;
+  lastLoginDate: string;
 }

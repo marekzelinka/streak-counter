@@ -11,10 +11,10 @@ npm install @marekzelinka/streak-counter
 ### Usage
 
 ```typescript
-import { streakCounter } from '@marekzelinka/streak-counter'
+import { streakCounter } from "@marekzelinka/streak-counter";
 
-const today = new Date()
-const streak = streakCounter(localStorage, today)
+const today = new Date();
+const streak = streakCounter(localStorage, today);
 // streak returns an object:
 // {
 //    currentCount: 1,
