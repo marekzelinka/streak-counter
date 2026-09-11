@@ -40,7 +40,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "^5.7.2",
-    "vitest": "^4.1.0"
+    "vitest": "^5.0.0"
   },
   "description": "a streak counter inspired by Duolingo",
   "keywords": [
